@@ -35,3 +35,30 @@ const timeDisplay = document.getElementById('time');
 const submitButton = document.getElementById('submit');
 const initialsInput = document.getElementById('initials');
 const feedbackElement = document.getElementById('feedback');
+
+let currentQuestion = 0;
+let score = 0;
+let timeLeft = 60;
+let timer;
+
+function startQuiz() {
+  startButton.addEventListener('click', startTimer);
+  displayQuestion();
+}
+
+function startTimer() {
+  timer = setInterval(updateTimer, 1000);
+  updateTimer();
+  document.getElementById('start-screen').classList.add('hide');
+  document.getElementById('questions').classList.remove('hide');
+}
+
+function updateTimer() {
+  if (timeLeft > 0) {
+    timeLeft--;
+    timeDisplay.textContext = timeLeft;
+  } else {
+    clearInterval(timer);
+    endQuiz();
+  }
+}
