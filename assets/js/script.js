@@ -27,9 +27,8 @@ const questions = [
   }
 ]
 
-//Elements for the functions used
 const startButton = document.getElementById('start');
-const questionTitle = document.getElementById('question');
+const questionTitle = document.getElementById('question-title');
 const choicesElement = document.getElementById('choices');
 const endScreen = document.getElementById('end-screen');
 const timeDisplay = document.getElementById('time');
@@ -39,7 +38,7 @@ const feedbackElement = document.getElementById('feedback');
 
 let currentQuestion = 0;
 let score = 0;
-let timeLeft = 60;
+let timeLeft = 60; // Set the initial time here
 let timer;
 
 function startQuiz() {
@@ -57,7 +56,7 @@ function startTimer() {
 function updateTimer() {
   if (timeLeft > 0) {
     timeLeft--;
-    timeDisplay.textContext = timeLeft;
+    timeDisplay.textContent = timeLeft;
   } else {
     clearInterval(timer);
     endQuiz();
@@ -76,3 +75,56 @@ function displayQuestion() {
     choicesElement.appendChild(choiceButton);
   });
 }
+
+function checkAnswer(e) {
+  const selectedAnswer = e.target.textContent;
+  const correctAnswer = questions[currentQuestion].correctAnswer;
+
+  if (selectedAnswer === correctAnswer) {
+    score++;
+    feedbackElement.textContent = "Correct!";
+    feedbackElement.style.color = "green";
+  } else {
+    timeLeft -= 10; // Subtract time for incorrect answer
+    if (timeLeft < 0) {
+      timeLeft = 0;
+    }
+    feedbackElement.textContent = "Wrong!";
+    feedbackElement.style.color = "red";
+  }
+
+  const choices = document.querySelectorAll('.choices button');
+  choices.forEach(choice => {
+    choice.disabled = true;
+  });
+
+  currentQuestion++;
+  if (currentQuestion < questions.length) {
+    displayQuestion();
+  } else {
+    endQuiz();
+  }
+}
+
+function endQuiz() {
+  clearInterval(timer);
+  document.getElementById('questions').classList.add('hide');
+  endScreen.classList.remove('hide');
+  document.getElementById('final-score').textContent = score;
+}
+
+submitButton.addEventListener('click', () => {
+  const initials = initialsInput.value.trim();
+  const scoreData = {
+    initials: initials,
+    score: score
+  };
+  
+  let highScores = JSON.parse(localStorage.getItem('highScores')) || [];
+  highScores.push(scoreData);
+  highScores.sort((a, b) => b.score - a.score);
+  localStorage.setItem('highScores', JSON.stringify(highScores));
+  window.location.href = 'highscores.html';
+});
+
+startQuiz();
