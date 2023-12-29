@@ -27,6 +27,7 @@ const questions = [
   }
 ]
 
+//Elements for the functions used
 const startButton = document.getElementById('start');
 const questionTitle = document.getElementById('question');
 const choicesElement = document.getElementById('choices');
@@ -61,4 +62,17 @@ function updateTimer() {
     clearInterval(timer);
     endQuiz();
   }
+}
+
+function displayQuestion() {
+  const currentQ = questions[currentQuestion];
+  questionTitle.textContent = currentQ.question;
+  choicesElement.innerHTML = '';
+
+  currentQ.choices.forEach((choice) => {
+    const choiceButton = document.createElement('button');
+    choiceButton.textContent = choice;
+    choiceButton.addEventListener('click', checkAnswer);
+    choicesElement.appendChild(choiceButton);
+  });
 }
