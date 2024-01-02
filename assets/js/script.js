@@ -27,6 +27,7 @@ const questions = [
   }
 ]
 
+//Set elements
 const startButton = document.getElementById('start');
 const questionTitle = document.getElementById('question-title');
 const choicesElement = document.getElementById('choices');
@@ -38,7 +39,7 @@ const feedbackElement = document.getElementById('feedback');
 
 let currentQuestion = 0;
 let score = 0;
-let timeLeft = 60; // Set the initial time here
+let timeLeft = 60; // Setting the initial time here
 let timer;
 
 function startQuiz() {
@@ -82,16 +83,13 @@ function checkAnswer(e) {
 
   if (selectedAnswer === correctAnswer) {
     score++;
-    feedbackElement.textContent = "Correct!";
-    feedbackElement.style.color = "green";
   } else {
-    timeLeft -= 10; // Subtract time for incorrect answer
+    timeLeft -= 10; // Subtracting time for incorrect answers
     if (timeLeft < 0) {
       timeLeft = 0;
     }
-    feedbackElement.textContent = "Wrong!";
-    feedbackElement.style.color = "red";
   }
+
 
   const choices = document.querySelectorAll('.choices button');
   choices.forEach(choice => {

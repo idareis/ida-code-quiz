@@ -8,15 +8,21 @@ A Spy x Family timed quiz using HTML, CSS and JavaScript.
 
 Deployed URL: https://idareis.github.io/ida-code-quiz/
 
-- When you have the highscores and timer displayed along with the rules of the quiz.
-- By clicking 'Start Quiz', you will have your first    question and the timer will go off.
+- You have the highscores and timer displayed along with the rules of the quiz.
+- By clicking 'Start Quiz', you will have your first question and the timer will go off.
+
+![(web-screenshot)](/assets/images/127.0.0.1_5500_index.html.png) 
+
 - Picking the wrong question will cost you time, so be careful!
 - Once the timer reaches 0, you will get your score.
 - The player with the highest score will be at the top and the player with the lowest score will be at the bottom.
 
+![(web-screenshot)](/assets/images/127.0.0.1_5500_highscores.html.png)
+
 
 ## Credits
 
+Credits to <a href ="https://github.com/Giselesoubeiga">Gisele Soubeiga</a> for the help with this project.
 
 
 ## License
